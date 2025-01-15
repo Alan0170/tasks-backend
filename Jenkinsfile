@@ -8,9 +8,9 @@ pipeline {
             }
         }
         
-        stage('Stage 2') {
+        stage('Unit tests') {
             steps {
-                echo 'End pipeline'
+                bat 'mvn test'
             }
         }
     }
