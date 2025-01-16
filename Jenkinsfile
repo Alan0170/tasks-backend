@@ -64,5 +64,14 @@ pipeline {
                 }
             }
         }
+
+        stage('Functional Tests') {
+            steps {
+                dir('functional-test') {
+                    git branch: 'master', url: 'https://github.com/Alan0170/tasks-functional-tests'
+                    bat 'mvn test'         
+                }
+            }
+        }
     }
 }
