@@ -48,8 +48,10 @@ pipeline {
 
         stage('API Tests') {
             steps {
-               git 'https://github.com/Alan0170/tasks-api-test'
-               bat 'mvn test'
+                dir('api-test') {
+                    git 'https://github.com/Alan0170/tasks-api-test'
+                    bat 'mvn test'           
+                }
             }
         }
     }
