@@ -32,7 +32,7 @@ pipeline {
 
         stage('Quality Gate') {
             steps {
-                sleep(8)
+                sleep(12)
                 timeout(time: 1, unit: 'MINUTES') {
                 waitForQualityGate abortPipeline: false, credentialsId: 'SonarToken'
                     
@@ -78,6 +78,15 @@ pipeline {
             steps {
                 bat 'docker-compose build'
                 bat 'docker-compose up -d'
+            }
+        }
+
+        stage('Health Check') {
+            steps {
+                sleep(12)
+                dir('functional-test') {
+                    bat ' mvn verify -DskipTests'         
+                }
             }
         }
     }
